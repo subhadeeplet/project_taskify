@@ -14,13 +14,11 @@ if ($LASTEXITCODE -ne 0) {
 Set-Location $PSScriptRoot\..
 
 Write-Host "Creating GitHub repo (if needed) and pushing..."
-& $gh repo create subhadeeplet/Taskify --public --source=. --remote=origin --push 2>$null
-if ($LASTEXITCODE -ne 0) {
-  git push -u origin main
-}
+git remote set-url origin https://github.com/subhadeeplet/project_taskify.git 2>$null
+git push -u origin main
 
 Write-Host ""
-Write-Host "GitHub push complete: https://github.com/subhadeeplet/Taskify"
+Write-Host "GitHub push complete: https://github.com/subhadeeplet/project_taskify"
 Write-Host ""
 Write-Host "Render deploy:"
 Write-Host "  1. Go to https://dashboard.render.com/select-repo?type=blueprint"
