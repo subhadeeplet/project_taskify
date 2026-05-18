@@ -17,6 +17,13 @@ const frontendOrigins = (process.env.FRONTEND_URL || "http://localhost:5173")
   .map((origin) => origin.trim())
   .filter(Boolean);
 
+if (process.env.RAILWAY_PUBLIC_DOMAIN) {
+  const railwayOrigin = `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`;
+  if (!frontendOrigins.includes(railwayOrigin)) {
+    frontendOrigins.push(railwayOrigin);
+  }
+}
+
 app.use(
   helmet({
     contentSecurityPolicy: false,
@@ -60,6 +67,11 @@ const shouldServeFrontend =
 
 if (shouldServeFrontend) {
   const frontendDist = path.resolve(__dirname, "../../FRONTEND/dist/public");
+  const fs = require("fs");
+
+  if (!fs.existsSync(path.join(frontendDist, "index.html"))) {
+    console.error("Frontend build missing at:", frontendDist);
+  }
 
   app.use(express.static(frontendDist, { maxAge: "1d", index: false }));
 

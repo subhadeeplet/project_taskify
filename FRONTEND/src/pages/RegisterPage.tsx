@@ -137,7 +137,7 @@ export default function RegisterPage() {
                     <FormLabel>Role</FormLabel>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={field.value}
+                      value={field.value}
                       disabled={isLoading}
                     >
                       <FormControl>

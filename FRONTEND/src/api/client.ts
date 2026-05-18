@@ -61,6 +61,13 @@ function normalizeApiData(data: any): any {
     };
   }
 
+  if (data.token) {
+    return {
+      ...data,
+      id: data.id || data._id ? String(data.id || data._id) : undefined,
+    };
+  }
+
   if (data.title && data.status) {
     return normalizeTask(data);
   }

@@ -8,7 +8,7 @@ function formatAuthResponse(user, token, message) {
   return {
     message,
     token,
-    _id: user._id,
+    id: user._id,
     name: user.name,
     email: user.email,
     role: user.role,
@@ -51,6 +51,11 @@ async function register(req, res) {
 
     return res.status(201).send(formatAuthResponse(user, token, "User created successfully"));
   } catch (err) {
+    if (err.code === 11000) {
+      return res.status(400).send({
+        message: "User already exist with this email or username",
+      });
+    }
     console.error("Register error:", err.message);
     return res.status(500).send({ message: "Error creating user" });
   }
