@@ -10,8 +10,6 @@
     "start:prod": "npm run build && npm run start --prefix BACKEND",
     "typecheck": "npm run typecheck --prefix FRONTEND",
     "docker:build": "docker build -t taskify .",
-    "docker:up": "docker compose up --build -d",
-    "docker:down": "docker compose down",
     "deploy": "powershell -ExecutionPolicy Bypass -File scripts/deploy.ps1"
   }
 }
