@@ -5,6 +5,7 @@ node_modules/
 .env
 .env.local
 .env.docker
+.env.railway
 .env.*.local
 !.env.example
 
